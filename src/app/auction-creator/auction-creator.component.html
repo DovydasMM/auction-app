@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <div>
+    <input
+      type="text"
+      placeholder="Input Auction name"
+      id="auctionName"
+      name="auctionName"
+      ngModel
+      #auctionName="ngModel"
+    />
+  </div>
+  <div>
+    <input
+      type="text"
+      placeholder="Input Auction description"
+      id="auctionDesc"
+      name="auctionDesc"
+      ngModel
+      #auctionDesc="ngModel"
+    />
+  </div>
+  <button type="submit">Create Auction</button>
+</form>
