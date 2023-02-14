@@ -1,1 +1,4 @@
 <app-auction-creator></app-auction-creator>
+<div *ngFor="let auction of auctionList">
+  <app-auction-item [auctionItem]="auction"></app-auction-item>
+</div>
