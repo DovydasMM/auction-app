@@ -16,7 +16,18 @@ export class AuctionService {
     null,
     null
   );
-  auctionArray: Auction[] = [this.testAuction];
+
+  testAuction2 = new Auction(
+    'Keptuve',
+    'Very good',
+    null,
+    'active',
+    0,
+    null,
+    1676378571660,
+    1676381000000
+  );
+  auctionArray: Auction[] = [this.testAuction, this.testAuction2];
   auctionChanged = new Subject<Auction[]>();
   constructor() {}
 
@@ -38,7 +49,7 @@ export class AuctionService {
 
   startAuction(auctionItem: Auction) {
     let startDate = new Date().getTime();
-    let endDate = startDate + 60 * 1000;
+    let endDate = startDate + 10 * 1000;
     auctionItem.startDate = startDate;
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
@@ -52,7 +63,18 @@ export class AuctionService {
     }
   }
 
+  endOfAuction(auctionItem: Auction) {
+    auctionItem.status = 'ended';
+    this.auctionChanged.next(this.auctionArray);
+  }
+
   getAuctionList() {
+    console.log(new Date().getTime());
     return this.auctionArray;
+  }
+
+  getTimeDif(auctionItem: Auction) {
+    let currentTime = new Date().getTime();
+    return Number(((auctionItem.endDate - currentTime) / 1000).toFixed(0));
   }
 }

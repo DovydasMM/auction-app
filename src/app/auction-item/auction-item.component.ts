@@ -12,21 +12,31 @@ export class AuctionItemComponent implements OnInit {
   constructor(private auctionService: AuctionService) {}
 
   @Input() auctionItem: Auction;
-  timer: any = 60;
+  timer: any = 10;
   subscription: Subscription;
   auctionStared = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.auctionItem.status == 'active') {
+      this.timer = this.auctionService.getTimeDif(this.auctionItem);
+      this.startTimer();
+    }
+  }
 
   startAuction() {
     this.auctionService.startAuction(this.auctionItem);
+    this.startTimer();
+  }
+
+  startTimer() {
     this.subscription = interval(1000).subscribe((x) => {
-      if (this.timer == 0) {
+      let currentTime = new Date().getTime();
+      this.timer = ((this.auctionItem.endDate - currentTime) / 1000).toFixed(0);
+      if (this.timer <= 0) {
+        this.auctionService.endOfAuction(this.auctionItem);
         this.subscription.unsubscribe();
         return;
       }
-      let currentTime = new Date().getTime();
-      this.timer = ((this.auctionItem.endDate - currentTime) / 1000).toFixed(0);
     });
   }
 

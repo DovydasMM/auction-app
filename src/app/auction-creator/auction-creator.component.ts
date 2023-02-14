@@ -15,5 +15,6 @@ export class AuctionCreatorComponent {
     let auctionName = this.auctionForm.value.auctionName;
     let auctionDescription = this.auctionForm.value.auctionDesc;
     this.auctionService.createAuction(auctionName, auctionDescription);
+    this.auctionForm.reset();
   }
 }
