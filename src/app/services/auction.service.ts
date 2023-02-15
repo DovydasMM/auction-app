@@ -52,16 +52,22 @@ export class AuctionService {
 
   startAuction(auctionItem: Auction) {
     let startDate = new Date().getTime();
-    let endDate = startDate + 10 * 1000;
+    let endDate = startDate + 25 * 1000;
     auctionItem.startDate = startDate;
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
     this.auctionChanged.next(this.auctionArray);
   }
 
-  bidOnAuction(auctionItem: Auction) {
+  bidOnAuction(currentUser: AuctionUser, auctionItem: Auction) {
     if (auctionItem.endDate != 0) {
       auctionItem.endDate += 10 * 1000;
+      auctionItem.highestBid += 10;
+      auctionItem.highestBidder = currentUser;
+      if (!currentUser.userBids.includes(auctionItem)) {
+        currentUser.userBids.push(auctionItem);
+      }
+
       this.auctionChanged.next(this.auctionArray);
     }
   }
@@ -78,7 +84,7 @@ export class AuctionService {
   getActiveAuctions() {
     let activeAuctions = [];
 
-    ///Don't know why filter doesnt work
+    ///Don't know why filter doesn't work
     this.auctionArray.forEach((auction) => {
       if (auction.status === 'active') {
         activeAuctions.push(auction);

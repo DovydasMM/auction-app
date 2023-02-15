@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   changeUser(user: AuctionUser) {
     this.currentUser = user;
+    this.changeMenu('activeAuctions');
   }
 
   changeMenu(menu: string) {

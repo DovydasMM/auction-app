@@ -1,6 +1,7 @@
 <div class="auction-item">
   <p>{{ auctionItem.auctionName }}</p>
   <p>{{ auctionItem.auctionDescription }}</p>
+  <p>Highest bid: {{ auctionItem.highestBid }}</p>
   <p *ngIf="auctionItem.status == 'inactive'">Auction is inactive</p>
   <p *ngIf="timer != 0 && auctionItem.status == 'active'">{{ timer }}</p>
   <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
@@ -11,7 +12,12 @@
   >
     Start auction
   </button>
-  <button (click)="bidAuction()" [disabled]="auctionItem.status != 'active'">
+  <button
+    (click)="bidAuction()"
+    [disabled]="
+      auctionItem.status != 'active' || auctionUser == auctionItem.auctionOwner
+    "
+  >
     Bid
   </button>
 </div>

@@ -15,7 +15,7 @@ export class AuctionItemComponent implements OnInit {
   @Input() auctionItem: Auction;
   @Input() auctionUser: AuctionUser;
 
-  timer: any = 10;
+  timer: any = 25;
   subscription: Subscription;
   auctionStared = false;
 
@@ -44,6 +44,6 @@ export class AuctionItemComponent implements OnInit {
   }
 
   bidAuction() {
-    this.auctionService.bidOnAuction(this.auctionItem);
+    this.auctionService.bidOnAuction(this.auctionUser, this.auctionItem);
   }
 }

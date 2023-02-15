@@ -20,7 +20,6 @@ export class UserService {
 
   addUserAuction(currentUser: AuctionUser, newAuction: Auction) {
     currentUser.userAuctions.push(newAuction);
-    console.log(currentUser);
   }
 
   getUserBids(currentUser: AuctionUser) {
