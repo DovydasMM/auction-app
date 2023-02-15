@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { interval, Subject, Subscription } from 'rxjs';
 import { Auction } from '../models/auction.model';
 import { AuctionUser } from '../models/auctionUser.model';
@@ -15,30 +15,40 @@ export class AuctionItemComponent implements OnInit {
   @Input() auctionItem: Auction;
   @Input() auctionUser: AuctionUser;
 
-  timer: any = 25;
+  timer;
   subscription: Subscription;
   auctionStared = false;
 
   ngOnInit(): void {
+    //On auction changes restarts timers, so it syncs up.
+    this.auctionService.auctionChanged.subscribe((auctionData) => {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+        this.startTimer();
+      } else if (!this.subscription && this.auctionItem.status == 'active') {
+        this.startTimer();
+      }
+    });
+
+    //If auction is active, starts the timer on init.
     if (this.auctionItem.status == 'active') {
-      this.timer = this.auctionService.getTimeDif(this.auctionItem);
       this.startTimer();
     }
   }
 
   startAuction() {
     this.auctionService.startAuction(this.auctionItem);
-    this.startTimer();
   }
 
   startTimer() {
+    this.timer = this.auctionService.getTimeDif(this.auctionItem);
+
     this.subscription = interval(1000).subscribe((x) => {
       let currentTime = new Date().getTime();
       this.timer = ((this.auctionItem.endDate - currentTime) / 1000).toFixed(0);
       if (this.timer <= 0) {
         this.auctionService.endOfAuction(this.auctionItem);
         this.subscription.unsubscribe();
-        return;
       }
     });
   }
@@ -46,4 +56,8 @@ export class AuctionItemComponent implements OnInit {
   bidAuction() {
     this.auctionService.bidOnAuction(this.auctionUser, this.auctionItem);
   }
+
+  // resetTimer() {
+  //   this.startTimer();
+  // }
 }

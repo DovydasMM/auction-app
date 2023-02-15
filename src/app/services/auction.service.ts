@@ -52,7 +52,7 @@ export class AuctionService {
 
   startAuction(auctionItem: Auction) {
     let startDate = new Date().getTime();
-    let endDate = startDate + 25 * 1000;
+    let endDate = startDate + 10 * 1000;
     auctionItem.startDate = startDate;
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
