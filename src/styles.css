@@ -1,4 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
 .auction-item {
   border: 1px solid black;
+}
+
+.auction-container {
+  margin-left: 10rem;
+}
+
+.sidebar {
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  min-width: 10rem;
 }

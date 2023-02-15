@@ -1,4 +1,48 @@
-<app-auction-creator></app-auction-creator>
-<div *ngFor="let auction of auctionList">
-  <app-auction-item [auctionItem]="auction"></app-auction-item>
+<header>Auction App</header>
+<h1>Current user: {{ currentUser.userName }}</h1>
+<div class="container">
+  <div class="sidebar">
+    <div *ngFor="let user of userList">
+      <p (click)="changeUser(user)">{{ user.userName }}</p>
+    </div>
+    <div class="sidebar-menu">
+      <p (click)="changeMenu('activeAuctions')">Active auctions</p>
+      <p (click)="changeMenu('userAuctions')">My auctions</p>
+    </div>
+  </div>
+  <div class="auction-container">
+    <div *ngIf="currentMenu == 'activeAuctions'">
+      <h2>Active auctions</h2>
+      <div *ngFor="let auction of activeList">
+        <app-auction-item
+          [auctionItem]="auction"
+          [auctionUser]="currentUser"
+        ></app-auction-item>
+      </div>
+      <h2>{{ currentUser.userName }} Bids</h2>
+      <div *ngFor="let auction of currentUser.userBids">
+        <app-auction-item
+          [auctionItem]="auction"
+          [auctionUser]="currentUser"
+        ></app-auction-item>
+      </div>
+    </div>
+    <div *ngIf="currentMenu == 'userAuctions'">
+      <h2>{{ currentUser.userName }} All listed auctions</h2>
+      <div *ngFor="let auction of currentUser.userAuctions">
+        <app-auction-item
+          [auctionItem]="auction"
+          [auctionUser]="currentUser"
+        ></app-auction-item>
+      </div>
+      <app-auction-creator [auctionUser]="currentUser"></app-auction-creator>
+    </div>
+  </div>
 </div>
+
+<!-- <div *ngFor="let auction of auctionList">
+  <app-auction-item
+    [auctionItem]="auction"
+    [auctionUser]="currentUser"
+  ></app-auction-item>
+</div> -->

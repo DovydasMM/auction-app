@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Auction } from '../models/auction.model';
+import { AuctionUser } from '../models/auctionUser.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,21 +23,22 @@ export class AuctionService {
     'Keptuve',
     'Very good',
     null,
-    'active',
+    'inactive',
     0,
     null,
-    1676378571660,
-    1676381000000
+    null,
+    null
   );
-  auctionArray: Auction[] = [this.testAuction, this.testAuction2];
+  // auctionArray: Auction[] = [this.testAuction, this.testAuction2];
+  auctionArray: Auction[] = [];
   auctionChanged = new Subject<Auction[]>();
-  constructor() {}
+  constructor(private userService: UserService) {}
 
-  createAuction(auctionName, auctionDesc) {
+  createAuction(auctionName, auctionDesc, auctionOwner) {
     let newAuction = new Auction(
       auctionName,
       auctionDesc,
-      null,
+      auctionOwner,
       'inactive',
       0,
       null,
@@ -43,8 +46,8 @@ export class AuctionService {
       null
     );
     this.auctionArray.push(newAuction);
-
     this.auctionChanged.next(this.auctionArray);
+    this.userService.addUserAuction(auctionOwner, newAuction);
   }
 
   startAuction(auctionItem: Auction) {
@@ -69,12 +72,25 @@ export class AuctionService {
   }
 
   getAuctionList() {
-    console.log(new Date().getTime());
     return this.auctionArray;
+  }
+
+  getActiveAuctions() {
+    let activeAuctions = [];
+
+    ///Don't know why filter doesnt work
+    this.auctionArray.forEach((auction) => {
+      if (auction.status === 'active') {
+        activeAuctions.push(auction);
+      }
+    });
+    return activeAuctions;
   }
 
   getTimeDif(auctionItem: Auction) {
     let currentTime = new Date().getTime();
     return Number(((auctionItem.endDate - currentTime) / 1000).toFixed(0));
   }
+
+  getUserBids(currentUser: AuctionUser) {}
 }

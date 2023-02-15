@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { interval, Subject, Subscription } from 'rxjs';
 import { Auction } from '../models/auction.model';
+import { AuctionUser } from '../models/auctionUser.model';
 import { AuctionService } from '../services/auction.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class AuctionItemComponent implements OnInit {
   constructor(private auctionService: AuctionService) {}
 
   @Input() auctionItem: Auction;
+  @Input() auctionUser: AuctionUser;
+
   timer: any = 10;
   subscription: Subscription;
   auctionStared = false;
