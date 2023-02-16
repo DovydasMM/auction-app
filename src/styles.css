@@ -1,5 +1,7 @@
 .auction-item {
   border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
 }
 
 .auction-container {
@@ -12,8 +14,18 @@
 
 .container {
   display: flex;
+  min-width: 90vw;
 }
 
 .sidebar {
   min-width: 10rem;
+}
+
+.auction-bids {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-left: 1px solid grey;
+  align-items: center;
 }

@@ -1,8 +1,10 @@
+import { UserService } from './../services/user.service';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { interval, Subject, Subscription } from 'rxjs';
 import { Auction } from '../models/auction.model';
 import { AuctionUser } from '../models/auctionUser.model';
 import { AuctionService } from '../services/auction.service';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-auction-item',
@@ -10,7 +12,10 @@ import { AuctionService } from '../services/auction.service';
   styleUrls: ['./auction-item.component.css'],
 })
 export class AuctionItemComponent implements OnInit {
-  constructor(private auctionService: AuctionService) {}
+  constructor(
+    private auctionService: AuctionService,
+    private userService: UserService
+  ) {}
 
   @Input() auctionItem: Auction;
   @Input() auctionUser: AuctionUser;
@@ -18,6 +23,10 @@ export class AuctionItemComponent implements OnInit {
   timer;
   subscription: Subscription;
   auctionStared = false;
+  arrowRight = faArrowRight;
+  arrowLeft = faArrowLeft;
+  showAuctionInfo = false;
+  auctionHistory = [];
 
   ngOnInit(): void {
     //On auction changes restarts timers, so it syncs up.
@@ -55,9 +64,11 @@ export class AuctionItemComponent implements OnInit {
 
   bidAuction() {
     this.auctionService.bidOnAuction(this.auctionUser, this.auctionItem);
+    this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
   }
 
-  // resetTimer() {
-  //   this.startTimer();
-  // }
+  showInfo() {
+    this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
+    this.showAuctionInfo = !this.showAuctionInfo;
+  }
 }

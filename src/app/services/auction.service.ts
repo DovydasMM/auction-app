@@ -12,8 +12,9 @@ export class AuctionService {
     'Kibinas',
     'Very delicious',
     null,
-    'inactive',
+    'active',
     0,
+    null,
     null,
     null,
     null
@@ -23,8 +24,9 @@ export class AuctionService {
     'Keptuve',
     'Very good',
     null,
-    'inactive',
+    'active',
     0,
+    null,
     null,
     null,
     null
@@ -42,6 +44,7 @@ export class AuctionService {
       'inactive',
       0,
       null,
+      [],
       null,
       null
     );
@@ -64,6 +67,20 @@ export class AuctionService {
       auctionItem.endDate += 10 * 1000;
       auctionItem.highestBid += 10;
       auctionItem.highestBidder = currentUser;
+
+      let newBid = { bidder: currentUser, bidSum: auctionItem.highestBid };
+
+      //Checks if current bidder has already bid on this auction.
+      //If he has, it updates his sum.
+      //If Not, he is added to the bidder list
+      let indexOf = auctionItem.bidHistory.find((index) => {
+        return index.bidder == newBid.bidder;
+      });
+      if (!indexOf) auctionItem.bidHistory.push(newBid);
+      else {
+        indexOf.bidSum = newBid.bidSum;
+      }
+
       if (!currentUser.userBids.includes(auctionItem)) {
         currentUser.userBids.push(auctionItem);
       }
@@ -99,4 +116,12 @@ export class AuctionService {
   }
 
   getUserBids(currentUser: AuctionUser) {}
+
+  getBidHistory(auctionItem: Auction) {
+    let bidHistory = auctionItem.bidHistory;
+    bidHistory.sort((a, b) => (a.bidSum > b.bidSum ? -1 : 1));
+    console.log(bidHistory);
+
+    return bidHistory;
+  }
 }

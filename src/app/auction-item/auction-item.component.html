@@ -1,23 +1,49 @@
 <div class="auction-item">
-  <p>{{ auctionItem.auctionName }}</p>
-  <p>{{ auctionItem.auctionDescription }}</p>
-  <p>Highest bid: {{ auctionItem.highestBid }}</p>
-  <p *ngIf="auctionItem.status == 'inactive'">Auction is inactive</p>
-  <p *ngIf="timer != 0 && auctionItem.status == 'active'">{{ timer }}</p>
-  <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
-
-  <button
-    (click)="startAuction()"
-    [disabled]="auctionItem.status == 'active' || auctionItem.status == 'ended'"
-  >
-    Start auction
-  </button>
-  <button
-    (click)="bidAuction()"
-    [disabled]="
-      auctionItem.status != 'active' || auctionUser == auctionItem.auctionOwner
-    "
-  >
-    Bid
-  </button>
+  <div class="auction-info">
+    <p>{{ auctionItem.auctionName }}</p>
+    <p>{{ auctionItem.auctionDescription }}</p>
+    <p>Highest bid: {{ auctionItem.highestBid }}</p>
+    <p *ngIf="auctionItem.status == 'inactive'">Auction is inactive</p>
+    <p *ngIf="timer != 0 && auctionItem.status == 'active'">{{ timer }}</p>
+    <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
+    <button
+      (click)="startAuction()"
+      [disabled]="
+        auctionItem.status == 'active' || auctionItem.status == 'ended'
+      "
+    >
+      Start auction
+    </button>
+    <button
+      (click)="bidAuction()"
+      [disabled]="
+        auctionItem.status != 'active' ||
+        auctionUser == auctionItem.auctionOwner
+      "
+    >
+      Bid
+    </button>
+  </div>
+  <div *ngIf="!showAuctionInfo" class="auction-bids" (click)="showInfo()">
+    <fa-icon [icon]="arrowRight"></fa-icon>
+  </div>
+  <div *ngIf="showAuctionInfo && auctionItem.status == 'active'">
+    <p *ngFor="let bid of auctionHistory; index as i">
+      {{ i + 1 }}. {{ bid.bidder.userName }}. {{ bid.bidSum }}
+    </p>
+  </div>
+  <div *ngIf="showAuctionInfo && auctionItem.status == 'ended'">
+    <div *ngIf="auctionItem.highestBidder">
+      <p>Auction winner</p>
+      <p>{{ auctionItem.highestBidder.userName }}</p>
+      <p>Winning sum</p>
+      <p>{{ auctionItem.highestBid }}</p>
+    </div>
+    <div *ngIf="!auctionItem.highestBidder">
+      <p>No one bid for this item</p>
+    </div>
+  </div>
+  <div *ngIf="showAuctionInfo" class="auction-bids" (click)="showInfo()">
+    <fa-icon [icon]="arrowLeft"></fa-icon>
+  </div>
 </div>

@@ -8,6 +8,7 @@ export class Auction {
     public status: string,
     public highestBid: number,
     public highestBidder: any,
+    public bidHistory = [],
     public startDate: any,
     public endDate: any
   ) {}
