@@ -1,3 +1,4 @@
+import { PostsService } from './posts.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Auction } from '../models/auction.model';
@@ -10,7 +11,10 @@ import { UserService } from './user.service';
 export class AuctionService {
   auctionArray: Auction[] = [];
   auctionChanged = new Subject<Auction[]>();
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private postService: PostsService
+  ) {}
 
   createAuction(auctionName, auctionDesc, auctionOwner) {
     let newAuction = new Auction(
@@ -36,6 +40,9 @@ export class AuctionService {
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
     this.auctionChanged.next(this.auctionArray);
+    this.postService.uploadPost(this.auctionArray).subscribe((resData) => {
+      console.log(resData);
+    });
   }
 
   bidOnAuction(currentUser: AuctionUser, auctionItem: Auction) {

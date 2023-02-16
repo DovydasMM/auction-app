@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { AuctionCreatorComponent } from './auction-creator/auction-creator.component';
 import { AuctionItemComponent } from './auction-item/auction-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, AuctionCreatorComponent, AuctionItemComponent],
-  imports: [BrowserModule, FormsModule, FontAwesomeModule],
+  imports: [BrowserModule, FormsModule, FontAwesomeModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
