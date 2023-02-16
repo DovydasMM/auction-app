@@ -31,7 +31,7 @@ export class AuctionItemComponent implements OnInit {
   ngOnInit(): void {
     //On auction changes restarts timers, so it syncs up.
     this.auctionService.auctionChanged.subscribe((auctionData) => {
-      if (this.subscription) {
+      if (this.subscription && this.auctionItem.status == 'active') {
         this.subscription.unsubscribe();
         this.startTimer();
       } else if (!this.subscription && this.auctionItem.status == 'active') {
@@ -56,6 +56,7 @@ export class AuctionItemComponent implements OnInit {
       let currentTime = new Date().getTime();
       this.timer = ((this.auctionItem.endDate - currentTime) / 1000).toFixed(0);
       if (this.timer <= 0) {
+        console.log(this.timer);
         this.auctionService.endOfAuction(this.auctionItem);
         this.subscription.unsubscribe();
       }

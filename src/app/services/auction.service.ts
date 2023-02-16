@@ -8,30 +8,6 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class AuctionService {
-  testAuction = new Auction(
-    'Kibinas',
-    'Very delicious',
-    null,
-    'active',
-    0,
-    null,
-    null,
-    null,
-    null
-  );
-
-  testAuction2 = new Auction(
-    'Keptuve',
-    'Very good',
-    null,
-    'active',
-    0,
-    null,
-    null,
-    null,
-    null
-  );
-  // auctionArray: Auction[] = [this.testAuction, this.testAuction2];
   auctionArray: Auction[] = [];
   auctionChanged = new Subject<Auction[]>();
   constructor(private userService: UserService) {}
@@ -91,6 +67,7 @@ export class AuctionService {
 
   endOfAuction(auctionItem: Auction) {
     auctionItem.status = 'ended';
+    console.log(auctionItem);
     this.auctionChanged.next(this.auctionArray);
   }
 
