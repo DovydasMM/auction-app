@@ -1,3 +1,4 @@
+import { PostsService } from './services/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { Auction } from './models/auction.model';
 import { AuctionUser } from './models/auctionUser.model';
@@ -12,7 +13,8 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
   constructor(
     private auctionService: AuctionService,
-    private userService: UserService
+    private userService: UserService,
+    private postService: PostsService
   ) {}
   title = 'auction-app';
 
@@ -29,6 +31,12 @@ export class AppComponent implements OnInit {
     });
     this.userList = this.userService.getUsers();
     this.currentUser = this.userList[0];
+
+    this.postService.fetchPost().subscribe((resData) => {
+      this.auctionService.importAuctions(resData);
+      this.userList = this.userService.getUsers();
+      this.activeList = this.auctionService.getActiveAuctions();
+    });
   }
 
   changeUser(user: AuctionUser) {

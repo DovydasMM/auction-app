@@ -18,7 +18,7 @@
       (click)="bidAuction()"
       [disabled]="
         auctionItem.status != 'active' ||
-        auctionUser == auctionItem.auctionOwner
+        auctionUser.userName == auctionItem.auctionOwner
       "
     >
       Bid
@@ -29,13 +29,13 @@
   </div>
   <div *ngIf="showAuctionInfo && auctionItem.status == 'active'">
     <p *ngFor="let bid of auctionHistory; index as i">
-      {{ i + 1 }}. {{ bid.bidder.userName }}. {{ bid.bidSum }}
+      {{ i + 1 }}. {{ bid.bidder }}. {{ bid.bidSum }}
     </p>
   </div>
   <div *ngIf="showAuctionInfo && auctionItem.status == 'ended'">
     <div *ngIf="auctionItem.highestBidder">
       <p>Auction winner</p>
-      <p>{{ auctionItem.highestBidder.userName }}</p>
+      <p>{{ auctionItem.highestBidder }}</p>
       <p>Winning sum</p>
       <p>{{ auctionItem.highestBid }}</p>
     </div>

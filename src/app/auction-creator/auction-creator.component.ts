@@ -14,10 +14,8 @@ export class AuctionCreatorComponent {
   constructor(private auctionService: AuctionService) {}
 
   onSubmit() {
-    // let auctionName = this.auctionForm.value.auctionName;
-    // let auctionDescription = this.auctionForm.value.auctionDesc;
-    let auctionName = 'This is a test name';
-    let auctionDescription = 'This is a test description';
+    let auctionName = this.auctionForm.value.auctionName;
+    let auctionDescription = this.auctionForm.value.auctionDesc;
     let auctionOwner = this.auctionUser;
     this.auctionService.createAuction(
       auctionName,

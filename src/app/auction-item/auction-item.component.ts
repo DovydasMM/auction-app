@@ -38,7 +38,6 @@ export class AuctionItemComponent implements OnInit {
         this.startTimer();
       }
     });
-
     //If auction is active, starts the timer on init.
     if (this.auctionItem.status == 'active') {
       this.startTimer();

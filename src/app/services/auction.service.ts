@@ -20,7 +20,7 @@ export class AuctionService {
     let newAuction = new Auction(
       auctionName,
       auctionDesc,
-      auctionOwner,
+      auctionOwner.userName,
       'inactive',
       0,
       null,
@@ -35,23 +35,24 @@ export class AuctionService {
 
   startAuction(auctionItem: Auction) {
     let startDate = new Date().getTime();
-    let endDate = startDate + 10 * 1000;
+    let endDate = startDate + 120 * 1000;
     auctionItem.startDate = startDate;
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
+    this.updateDatabase();
     this.auctionChanged.next(this.auctionArray);
-    this.postService.uploadPost(this.auctionArray).subscribe((resData) => {
-      console.log(resData);
-    });
   }
 
   bidOnAuction(currentUser: AuctionUser, auctionItem: Auction) {
     if (auctionItem.endDate != 0) {
       auctionItem.endDate += 10 * 1000;
       auctionItem.highestBid += 10;
-      auctionItem.highestBidder = currentUser;
+      auctionItem.highestBidder = currentUser.userName;
 
-      let newBid = { bidder: currentUser, bidSum: auctionItem.highestBid };
+      let newBid = {
+        bidder: currentUser.userName,
+        bidSum: auctionItem.highestBid,
+      };
 
       //Checks if current bidder has already bid on this auction.
       //If he has, it updates his sum.
@@ -67,14 +68,15 @@ export class AuctionService {
       if (!currentUser.userBids.includes(auctionItem)) {
         currentUser.userBids.push(auctionItem);
       }
-
+      this.updateDatabase();
       this.auctionChanged.next(this.auctionArray);
     }
   }
 
   endOfAuction(auctionItem: Auction) {
     auctionItem.status = 'ended';
-    console.log(auctionItem);
+
+    this.updateDatabase();
     this.auctionChanged.next(this.auctionArray);
   }
 
@@ -99,13 +101,23 @@ export class AuctionService {
     return Number(((auctionItem.endDate - currentTime) / 1000).toFixed(0));
   }
 
-  getUserBids(currentUser: AuctionUser) {}
-
   getBidHistory(auctionItem: Auction) {
     let bidHistory = auctionItem.bidHistory;
     bidHistory.sort((a, b) => (a.bidSum > b.bidSum ? -1 : 1));
-    console.log(bidHistory);
-
     return bidHistory;
+  }
+
+  updateDatabase() {
+    this.postService.uploadPost(this.auctionArray).subscribe();
+  }
+
+  importAuctions(auctionData) {
+    let newArray = [];
+    auctionData.forEach((auctionItem) => {
+      newArray.push(auctionItem);
+    });
+    this.auctionArray = newArray;
+    this.userService.importAuctions(this.auctionArray);
+    this.auctionChanged.next(this.auctionArray);
   }
 }
