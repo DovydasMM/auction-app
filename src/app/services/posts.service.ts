@@ -9,6 +9,7 @@ export class PostsService {
 
   uploadPost(auctionList) {
     let newList = JSON.stringify(auctionList);
+    console.log(newList);
     return this.http.post(
       `https://auction-app-6f3cf-default-rtdb.europe-west1.firebasedatabase.app/auctionData.json`,
       newList
