@@ -1,13 +1,25 @@
 <div class="auction-item">
   <div class="auction-info">
-    <p>{{ auctionItem.auctionName }}</p>
-    <p>{{ auctionItem.auctionDescription }}</p>
+    <p>
+      {{
+        auctionItem.auctionName ? auctionItem.auctionName : "Name was forgotten"
+      }}
+    </p>
+    <p>
+      {{
+        auctionItem.auctionDescription
+          ? auctionItem.auctionDescription
+          : "Description was forgotten"
+      }}
+    </p>
     <p>Highest bid: {{ auctionItem.highestBid }}</p>
+
     <p *ngIf="auctionItem.status == 'inactive'">Auction is inactive</p>
     <p *ngIf="timer != 0 && auctionItem.status == 'active'">
       {{ timer * 1000 | date : "mm:ss" }}
     </p>
     <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
+    <p *ngIf="auctionItem.auctionOwner == auctionUser.userName">Your item</p>
     <button
       *ngIf="
         auctionUser.userName == auctionItem.auctionOwner &&
@@ -44,6 +56,6 @@
     </div>
   </div>
   <div *ngIf="showAuctionInfo" class="auction-bids" (click)="showInfo()">
-    <fa-icon [icon]="arrowLeft"></fa-icon>
+    <fa-icon [icon]="arrowLeft" class="arrow"></fa-icon>
   </div>
 </div>

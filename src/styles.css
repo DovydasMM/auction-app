@@ -43,3 +43,7 @@
   border-left: 1px solid grey;
   align-items: center;
 }
+
+.arrow {
+  transform: rotate(-90deg);
+}
