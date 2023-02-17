@@ -12,16 +12,18 @@
     </div>
   </div>
   <div class="container">
-    <div class="auction-container">
-      <div *ngIf="currentMenu == 'activeAuctions'">
-        <h2>Active auctions</h2>
+    <div class="container-active" *ngIf="currentMenu == 'activeAuctions'">
+      <h2>All active auctions</h2>
+      <div class="container-auctions">
         <div *ngFor="let auction of activeList">
           <app-auction-item
             [auctionItem]="auction"
             [auctionUser]="currentUser"
           ></app-auction-item>
         </div>
-        <h2>{{ currentUser.userName }} Bids</h2>
+      </div>
+      <h2>{{ currentUser.userName }} Bids</h2>
+      <div class="container-auctions">
         <div *ngFor="let auction of currentUser.userBids">
           <app-auction-item
             [auctionItem]="auction"
@@ -29,6 +31,8 @@
           ></app-auction-item>
         </div>
       </div>
+    </div>
+    <div class="container-user-auctions">
       <div *ngIf="currentMenu == 'userAuctions'">
         <h2>{{ currentUser.userName }} All listed auctions</h2>
         <div *ngFor="let auction of currentUser.userAuctions">

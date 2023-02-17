@@ -6,13 +6,21 @@
   display: flex;
   min-width: 90vw;
   flex-direction: column;
+  margin-left: 3rem;
+}
+
+.container-auctions {
+  display: flex;
 }
 
 .auction-item {
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
-  max-width: 20rem;
+  width: fit-content;
+  margin: 1rem;
+  min-width: 10rem;
+  min-height: 10rem;
 }
 
 .auction-container {
