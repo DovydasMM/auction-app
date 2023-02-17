@@ -27,11 +27,23 @@ export class UserService {
   }
 
   importAuctions(auctionArray: Auction[]) {
+    //Fills userAuction array
     auctionArray.forEach((auction) => {
       let userIndex = this.userArray.findIndex(
         (user) => user.userName == auction.auctionOwner
       );
       this.userArray[userIndex].userAuctions.push(auction);
+    });
+
+    //Fills userBid array
+    auctionArray.forEach((auction) => {
+      let bidHistory = auction.bidHistory;
+      bidHistory.forEach((bid) => {
+        let bidderIndex = this.userArray.findIndex(
+          (user) => user.userName == bid.bidder
+        );
+        this.userArray[bidderIndex].userBids.push(auction);
+      });
     });
   }
 }

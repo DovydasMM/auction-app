@@ -1,6 +1,7 @@
 <header>Auction App</header>
 <h1>Current user: {{ currentUser.userName }}</h1>
-<div class="container">
+
+<div class="mainBody">
   <div class="sidebar">
     <div *ngFor="let user of userList">
       <p (click)="changeUser(user)">{{ user.userName }}</p>
@@ -10,32 +11,34 @@
       <p (click)="changeMenu('userAuctions')">My auctions</p>
     </div>
   </div>
-  <div class="auction-container">
-    <div *ngIf="currentMenu == 'activeAuctions'">
-      <h2>Active auctions</h2>
-      <div *ngFor="let auction of activeList">
-        <app-auction-item
-          [auctionItem]="auction"
-          [auctionUser]="currentUser"
-        ></app-auction-item>
+  <div class="container">
+    <div class="auction-container">
+      <div *ngIf="currentMenu == 'activeAuctions'">
+        <h2>Active auctions</h2>
+        <div *ngFor="let auction of activeList">
+          <app-auction-item
+            [auctionItem]="auction"
+            [auctionUser]="currentUser"
+          ></app-auction-item>
+        </div>
+        <h2>{{ currentUser.userName }} Bids</h2>
+        <div *ngFor="let auction of currentUser.userBids">
+          <app-auction-item
+            [auctionItem]="auction"
+            [auctionUser]="currentUser"
+          ></app-auction-item>
+        </div>
       </div>
-      <h2>{{ currentUser.userName }} Bids</h2>
-      <div *ngFor="let auction of currentUser.userBids">
-        <app-auction-item
-          [auctionItem]="auction"
-          [auctionUser]="currentUser"
-        ></app-auction-item>
+      <div *ngIf="currentMenu == 'userAuctions'">
+        <h2>{{ currentUser.userName }} All listed auctions</h2>
+        <div *ngFor="let auction of currentUser.userAuctions">
+          <app-auction-item
+            [auctionItem]="auction"
+            [auctionUser]="currentUser"
+          ></app-auction-item>
+        </div>
+        <app-auction-creator [auctionUser]="currentUser"></app-auction-creator>
       </div>
-    </div>
-    <div *ngIf="currentMenu == 'userAuctions'">
-      <h2>{{ currentUser.userName }} All listed auctions</h2>
-      <div *ngFor="let auction of currentUser.userAuctions">
-        <app-auction-item
-          [auctionItem]="auction"
-          [auctionUser]="currentUser"
-        ></app-auction-item>
-      </div>
-      <app-auction-creator [auctionUser]="currentUser"></app-auction-creator>
     </div>
   </div>
 </div>

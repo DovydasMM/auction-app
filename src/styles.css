@@ -1,7 +1,18 @@
+.mainBody {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  min-width: 90vw;
+  flex-direction: column;
+}
+
 .auction-item {
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
+  max-width: 20rem;
 }
 
 .auction-container {
@@ -10,11 +21,6 @@
 
 .sidebar {
   border: 1px solid black;
-}
-
-.container {
-  display: flex;
-  min-width: 90vw;
 }
 
 .sidebar {
