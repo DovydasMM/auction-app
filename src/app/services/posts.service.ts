@@ -23,10 +23,18 @@ export class PostsService {
       .get(
         'https://auction-app-6f3cf-default-rtdb.europe-west1.firebasedatabase.app/auctionData.json'
       )
-      .pipe(
+      .pipe<Auction[]>(
         map((resData) => {
           const auctionArray: Auction[] = [];
           for (const key in resData) {
+            //Addid bidHistory to auction, if it didnt have bidder when site is loaded
+            if (!resData[key].hasOwnProperty('bidHistory'))
+              resData[key].bidHistory = [];
+
+            //Checking if auction has ended off site
+            let currentTime = new Date().getTime();
+            if (currentTime > resData[key].endDate)
+              resData[key].status = 'ended';
             auctionArray.push(resData[key]);
           }
           return auctionArray;

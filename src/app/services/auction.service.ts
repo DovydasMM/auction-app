@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 export class AuctionService {
   auctionArray: Auction[] = [];
   auctionChanged = new Subject<Auction[]>();
+  auctionDuartion = 10;
   constructor(
     private userService: UserService,
     private postService: PostsService
@@ -23,11 +24,12 @@ export class AuctionService {
       auctionOwner.userName,
       'inactive',
       0,
-      null,
+      'none',
       [],
       null,
       null
     );
+    console.log(newAuction);
     this.auctionArray.push(newAuction);
     this.auctionChanged.next(this.auctionArray);
     this.userService.addUserAuction(auctionOwner, newAuction);
@@ -35,7 +37,7 @@ export class AuctionService {
 
   startAuction(auctionItem: Auction) {
     let startDate = new Date().getTime();
-    let endDate = startDate + 120 * 1000;
+    let endDate = startDate + this.auctionDuartion * 1000;
     auctionItem.startDate = startDate;
     auctionItem.endDate = endDate;
     auctionItem.status = 'active';
@@ -53,7 +55,7 @@ export class AuctionService {
         bidder: currentUser.userName,
         bidSum: auctionItem.highestBid,
       };
-
+      console.log(auctionItem.bidHistory);
       //Checks if current bidder has already bid on this auction.
       //If he has, it updates his sum.
       //If Not, he is added to the bidder list
