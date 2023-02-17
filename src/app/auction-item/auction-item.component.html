@@ -17,12 +17,6 @@
         {{ timer * 1000 | date : "mm:ss" }}
       </p>
 
-      <button
-        (click)="bidAuction()"
-        *ngIf="auctionUser.userName != auctionItem.auctionOwner"
-      >
-        Bid
-      </button>
       <p *ngIf="auctionItem.status == 'inactive'">Inactive</p>
       <p>{{ auctionItem.highestBid }}€</p>
     </div>
@@ -30,6 +24,7 @@
     <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
     <!-- <p *ngIf="auctionItem.auctionOwner == auctionUser.userName">Your item</p> -->
     <button
+      class="btn btn-outline-success btn-sm"
       *ngIf="
         auctionUser.userName == auctionItem.auctionOwner &&
         auctionItem.status == 'inactive'
@@ -39,8 +34,22 @@
       Start auction
     </button>
 
-    <div (click)="showInfo()">
-      <fa-icon [icon]="showAuctionInfo ? arrowUp : arrowDown"></fa-icon>
+    <div class="auction-bidTimer">
+      <div (click)="showInfo()">
+        <button class="btn btn-outline-dark btn-sm">
+          <fa-icon
+            class="auction-arrow"
+            [icon]="showAuctionInfo ? arrowUp : arrowDown"
+          ></fa-icon>
+        </button>
+      </div>
+      <button
+        class="btn btn-outline-primary btn-sm"
+        (click)="bidAuction()"
+        *ngIf="auctionUser.userName != auctionItem.auctionOwner"
+      >
+        Bid
+      </button>
     </div>
   </div>
 
@@ -52,6 +61,9 @@
       <p *ngFor="let bid of auctionHistory; index as i">
         {{ i + 1 }}. {{ bid.bidder }} {{ bid.bidSum }}€
       </p>
+      <div *ngIf="auctionItem.highestBid == 0">
+        <p>No one bid for this item</p>
+      </div>
     </div>
     <div
       *ngIf="showAuctionInfo && auctionItem.status == 'ended'"
@@ -60,9 +72,6 @@
       <div *ngIf="auctionItem.highestBidder">
         <p>Auction winner: {{ auctionItem.highestBidder }}</p>
         <p>Winning price: {{ auctionItem.highestBid }}€</p>
-      </div>
-      <div *ngIf="!auctionItem.highestBidder">
-        <p>No one bid for this item</p>
       </div>
     </div>
   </div>

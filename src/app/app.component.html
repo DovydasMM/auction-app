@@ -1,5 +1,5 @@
 <header>Auction App</header>
-<h1>Current user: {{ currentUser.userName }}</h1>
+<h4>Current user: {{ currentUser.userName }}</h4>
 
 <div class="mainBody">
   <div class="sidebar">
@@ -22,7 +22,7 @@
           ></app-auction-item>
         </div>
       </div>
-      <h2>{{ currentUser.userName }} Bids</h2>
+      <h4>{{ currentUser.userName }} Bids</h4>
       <div class="container-auctions">
         <div *ngFor="let auction of currentUser.userBids">
           <app-auction-item
@@ -32,17 +32,23 @@
         </div>
       </div>
     </div>
-    <div class="container-user-auctions">
+    <div class="container-active">
       <div *ngIf="currentMenu == 'userAuctions'">
-        <h2>{{ currentUser.userName }} All listed auctions</h2>
-        <div *ngFor="let auction of currentUser.userAuctions">
-          <app-auction-item
-            [auctionItem]="auction"
-            [auctionUser]="currentUser"
-          ></app-auction-item>
+        <h4>{{ currentUser.userName }} All listed auctions</h4>
+        <div class="container-auctions">
+          <div *ngFor="let auction of currentUser.userAuctions">
+            <app-auction-item
+              [auctionItem]="auction"
+              [auctionUser]="currentUser"
+            ></app-auction-item>
+          </div>
         </div>
         <app-auction-creator [auctionUser]="currentUser"></app-auction-creator>
       </div>
     </div>
   </div>
 </div>
+<footer class="footer">
+  © 2023 <a href="https://github.com/DovydasMM">DovydasMM</a>. All rights
+  reserved.
+</footer>

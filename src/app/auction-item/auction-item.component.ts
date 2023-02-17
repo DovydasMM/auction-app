@@ -77,5 +77,6 @@ export class AuctionItemComponent implements OnInit {
   showInfo() {
     this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
     this.showAuctionInfo = !this.showAuctionInfo;
+    console.log(this.auctionItem);
   }
 }

@@ -15,7 +15,8 @@ p {
 }
 
 .container-auctions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 18rem);
 }
 
 .auction-item {
@@ -72,8 +73,31 @@ p {
 
 .sidebar {
   border: 1px solid black;
+  height: 90vh;
 }
 
 .sidebar {
   min-width: 10rem;
+}
+
+.auction-arrow {
+  font-size: 1rem;
+}
+
+footer {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #636363;
+  text-decoration: underline;
 }
