@@ -1,5 +1,18 @@
+header {
+  background-color: #112d4e;
+  color: white;
+  text-align: center;
+  min-height: 3rem;
+  font-size: 1.85rem;
+}
+
+.header-title {
+  font-weight: bolder;
+}
+
 .mainBody {
   display: flex;
+  min-height: 95vh;
 }
 
 p {
@@ -9,9 +22,10 @@ p {
 
 .container {
   display: flex;
+  padding-top: 1rem;
   min-width: 90vw;
+  background-color: #f9f7f7;
   flex-direction: column;
-  margin-left: 3rem;
 }
 
 .container-auctions {
@@ -19,7 +33,15 @@ p {
   grid-template-columns: repeat(5, 18rem);
 }
 
+.auction-title {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 .auction-item {
+  background-color: white;
+  border-radius: 5px;
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
@@ -74,12 +96,28 @@ p {
 .sidebar {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  height: 90vh;
+  min-width: fit-content;
+  padding: 0.75rem;
+  background-color: DBE2EF;
 }
 
-.sidebar {
-  min-width: 10rem;
+.sidebar-title {
+  font-size: 1.5rem;
+  border-bottom: 1px solid black;
+}
+
+.sidebar-menu {
+  margin-bottom: 6rem;
+}
+
+.sidebar-options {
+  cursor: pointer;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+.sidebar-options:hover {
+  background-color: #e2f3ff;
 }
 
 .auction-arrow {

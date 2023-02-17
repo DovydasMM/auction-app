@@ -1,19 +1,28 @@
-<header>Auction App</header>
-<h4>Current user: {{ currentUser.userName }}</h4>
-
+<header><span class="header-title">Auction</span>App</header>
 <div class="mainBody">
   <div class="sidebar">
-    <div *ngFor="let user of userList">
-      <p (click)="changeUser(user)">{{ user.userName }}</p>
-    </div>
+    <p class="sidebar-title">Available Users</p>
     <div class="sidebar-menu">
-      <p (click)="changeMenu('activeAuctions')">Active auctions</p>
-      <p (click)="changeMenu('userAuctions')">My auctions</p>
+      <div *ngFor="let user of userList">
+        <p (click)="changeUser(user)" class="sidebar-options">
+          <fa-icon [icon]="userIcon" style="padding-right: 0.7rem"></fa-icon
+          >{{ user.userName }}
+        </p>
+      </div>
+    </div>
+    <p class="sidebar-title">{{ currentUser.userName }} menu</p>
+    <div class="sidebar-menu">
+      <p (click)="changeMenu('activeAuctions')" class="sidebar-options">
+        Active auctions
+      </p>
+      <p (click)="changeMenu('userAuctions')" class="sidebar-options">
+        My auctions
+      </p>
     </div>
   </div>
   <div class="container">
     <div class="container-active" *ngIf="currentMenu == 'activeAuctions'">
-      <h2>All active auctions</h2>
+      <p class="auction-title">All active auctions</p>
       <div class="container-auctions">
         <div *ngFor="let auction of activeList">
           <app-auction-item
@@ -22,7 +31,7 @@
           ></app-auction-item>
         </div>
       </div>
-      <h4>{{ currentUser.userName }} Bids</h4>
+      <p class="auction-title">{{ currentUser.userName }} Bids</p>
       <div class="container-auctions">
         <div *ngFor="let auction of currentUser.userBids">
           <app-auction-item
@@ -34,7 +43,9 @@
     </div>
     <div class="container-active">
       <div *ngIf="currentMenu == 'userAuctions'">
-        <h4>{{ currentUser.userName }} All listed auctions</h4>
+        <p class="auction-title">
+          {{ currentUser.userName }} All listed auctions
+        </p>
         <div class="container-auctions">
           <div *ngFor="let auction of currentUser.userAuctions">
             <app-auction-item

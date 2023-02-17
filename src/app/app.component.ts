@@ -4,6 +4,7 @@ import { Auction } from './models/auction.model';
 import { AuctionUser } from './models/auctionUser.model';
 import { AuctionService } from './services/auction.service';
 import { UserService } from './services/user.service';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
   userList: AuctionUser[];
   currentUser: AuctionUser;
   currentMenu: string = 'activeAuctions';
+  userIcon = faUser;
 
   ngOnInit(): void {
     this.auctionList = this.auctionService.getAuctionList();
