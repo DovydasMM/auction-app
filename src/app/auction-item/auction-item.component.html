@@ -34,15 +34,14 @@
       Start auction
     </button>
 
-    <div class="auction-bidTimer">
-      <div (click)="showInfo()">
-        <button class="btn btn-outline-dark btn-sm">
-          <fa-icon
-            class="auction-arrow"
-            [icon]="showAuctionInfo ? arrowUp : arrowDown"
-          ></fa-icon>
-        </button>
-      </div>
+    <div class="auction-bidTimer" *ngIf="auctionItem.status != 'inactive'">
+      <button class="btn btn-outline-dark btn-sm" (click)="showInfo()">
+        <fa-icon
+          class="auction-arrow"
+          [icon]="showAuctionInfo ? arrowUp : arrowDown"
+        ></fa-icon>
+      </button>
+
       <button
         class="btn btn-outline-primary btn-sm"
         (click)="bidAuction()"
