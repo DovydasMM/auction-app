@@ -4,7 +4,12 @@ import { interval, Subject, Subscription } from 'rxjs';
 import { Auction } from '../models/auction.model';
 import { AuctionUser } from '../models/auctionUser.model';
 import { AuctionService } from '../services/auction.service';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowRight,
+  faArrowLeft,
+  faArrowUp,
+  faArrowDown,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-auction-item',
@@ -25,6 +30,8 @@ export class AuctionItemComponent implements OnInit {
   auctionStared = false;
   arrowRight = faArrowRight;
   arrowLeft = faArrowLeft;
+  arrowUp = faArrowUp;
+  arrowDown = faArrowDown;
   showAuctionInfo = false;
   auctionHistory = [];
 
