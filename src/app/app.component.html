@@ -54,7 +54,14 @@
             ></app-auction-item>
           </div>
         </div>
-        <app-auction-creator [auctionUser]="currentUser"></app-auction-creator>
+        <!-- <app-auction-creator [auctionUser]="currentUser"></app-auction-creator> -->
+        <button
+          (click)="openDialog()"
+          class="btn btn-primary"
+          style="margin-left: 1rem"
+        >
+          Create auction
+        </button>
       </div>
     </div>
   </div>

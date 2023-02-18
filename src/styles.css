@@ -141,3 +141,50 @@ footer a:hover {
   color: #636363;
   text-decoration: underline;
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.auction-form {
+  width: 30vh;
+  height: 50vh;
+  display: flex;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  justify-content: space-evenly;
+}
+
+.form-elements {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.btn-auction {
+  margin-top: 1.25rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+label {
+  margin: 0.33rem 0 0.33rem 0;
+  font-weight: 500;
+}
+
+.alert.alert-danger {
+  margin-top: 0.15rem;
+  padding: 0.15rem;
+  font-size: 0.75rem;
+}

@@ -29,8 +29,8 @@ export class AuctionService {
       null,
       null
     );
-    console.log(newAuction);
     this.auctionArray.push(newAuction);
+    console.log(newAuction);
     this.auctionChanged.next(this.auctionArray);
     this.userService.addUserAuction(auctionOwner, newAuction);
   }
