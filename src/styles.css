@@ -1,5 +1,11 @@
+body {
+}
+
 header {
+  display: flex;
   background-color: #112d4e;
+  justify-content: center;
+  align-content: center;
   color: white;
   text-align: center;
   min-height: 3rem;
@@ -20,12 +26,12 @@ p {
   padding: 0;
 }
 
-.container {
+.containers {
   display: flex;
   padding-top: 1rem;
-  min-width: 90vw;
   background-color: #f9f7f7;
   flex-direction: column;
+  width: 90%;
 }
 
 .container-auctions {
@@ -46,7 +52,6 @@ p {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: fit-content;
   margin: 1rem;
   padding: 0.75rem;
   min-height: 20rem;
@@ -55,7 +60,7 @@ p {
 }
 
 .auction-name {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 800;
   padding: 0.5rem 0 1rem 0;
 }
@@ -94,7 +99,6 @@ p {
 }
 
 .sidebar {
-  display: flex;
   flex-direction: column;
   min-width: fit-content;
   padding: 0.75rem;
@@ -152,8 +156,8 @@ body {
 }
 
 .auction-form {
-  width: 30vh;
-  height: 50vh;
+  width: 20rem;
+  height: 30rem;
   display: flex;
   padding: 1rem;
   border: 1px solid black;
@@ -188,3 +192,39 @@ label {
   padding: 0.15rem;
   font-size: 0.75rem;
 }
+
+/* @media screen and (max-width: 360px) {
+  html {
+    font-size: 12px;
+  }
+
+  .container-auctions {
+    grid-template-columns: repeat(1, 18rem);
+  }
+
+  .sidebar-items {
+    position: sticky;
+    overflow-x: hidden;
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  .container-auctions {
+    grid-template-columns: repeat(2, 16rem);
+  }
+
+  .sidebar-items {
+    padding-top: 1rem;
+    position: sticky;
+    overflow-x: hidden;
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+} */

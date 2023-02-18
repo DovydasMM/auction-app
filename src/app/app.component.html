@@ -1,26 +1,28 @@
 <header><span class="header-title">Auction</span>App</header>
 <div class="mainBody">
   <div class="sidebar">
-    <p class="sidebar-title">Available Users</p>
-    <div class="sidebar-menu">
-      <div *ngFor="let user of userList">
-        <p (click)="changeUser(user)" class="sidebar-options">
-          <fa-icon [icon]="userIcon" style="padding-right: 0.7rem"></fa-icon
-          >{{ user.userName }}
+    <div class="sidebar-items">
+      <p class="sidebar-title">Available Users</p>
+      <div class="sidebar-menu">
+        <div *ngFor="let user of userList">
+          <p (click)="changeUser(user)" class="sidebar-options">
+            <fa-icon [icon]="userIcon" style="padding-right: 0.7rem"></fa-icon
+            >{{ user.userName }}
+          </p>
+        </div>
+      </div>
+      <p class="sidebar-title">{{ currentUser.userName }} menu</p>
+      <div class="sidebar-menu">
+        <p (click)="changeMenu('activeAuctions')" class="sidebar-options">
+          Active auctions
+        </p>
+        <p (click)="changeMenu('userAuctions')" class="sidebar-options">
+          My auctions
         </p>
       </div>
     </div>
-    <p class="sidebar-title">{{ currentUser.userName }} menu</p>
-    <div class="sidebar-menu">
-      <p (click)="changeMenu('activeAuctions')" class="sidebar-options">
-        Active auctions
-      </p>
-      <p (click)="changeMenu('userAuctions')" class="sidebar-options">
-        My auctions
-      </p>
-    </div>
   </div>
-  <div class="container">
+  <div class="containers">
     <div class="container-active" *ngIf="currentMenu == 'activeAuctions'">
       <p class="auction-title">All active auctions</p>
       <div class="container-auctions">
@@ -54,7 +56,6 @@
             ></app-auction-item>
           </div>
         </div>
-        <!-- <app-auction-creator [auctionUser]="currentUser"></app-auction-creator> -->
         <button
           (click)="openDialog()"
           class="btn btn-primary"
