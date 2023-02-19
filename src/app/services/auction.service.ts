@@ -30,9 +30,9 @@ export class AuctionService {
       null
     );
     this.auctionArray.push(newAuction);
-    console.log(newAuction);
     this.auctionChanged.next(this.auctionArray);
     this.userService.addUserAuction(auctionOwner, newAuction);
+    this.updateDatabase();
   }
 
   startAuction(auctionItem: Auction) {
@@ -45,10 +45,14 @@ export class AuctionService {
     this.auctionChanged.next(this.auctionArray);
   }
 
-  bidOnAuction(currentUser: AuctionUser, auctionItem: Auction) {
+  bidOnAuction(
+    currentUser: AuctionUser,
+    auctionItem: Auction,
+    higherBid: number
+  ) {
     if (auctionItem.endDate != 0) {
       auctionItem.endDate += 10 * 1000;
-      auctionItem.highestBid += 10;
+      auctionItem.highestBid = higherBid;
       auctionItem.highestBidder = currentUser.userName;
 
       let newBid = {

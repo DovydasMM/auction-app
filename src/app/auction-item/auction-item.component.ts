@@ -1,3 +1,4 @@
+import { AuctionBidComponent } from './../auction-bid/auction-bid.component';
 import { UserService } from './../services/user.service';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { interval, Subject, Subscription } from 'rxjs';
@@ -10,6 +11,12 @@ import {
   faArrowUp,
   faArrowDown,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-auction-item',
@@ -19,7 +26,8 @@ import {
 export class AuctionItemComponent implements OnInit {
   constructor(
     private auctionService: AuctionService,
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog
   ) {}
 
   @Input() auctionItem: Auction;
@@ -70,13 +78,15 @@ export class AuctionItemComponent implements OnInit {
   }
 
   bidAuction() {
-    this.auctionService.bidOnAuction(this.auctionUser, this.auctionItem);
-    this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
+    const dialogRef = this.dialog.open(AuctionBidComponent, {
+      data: { auctionUser: this.auctionUser, auctionItem: this.auctionItem },
+    });
+    // this.auctionService.bidOnAuction(this.auctionUser, this.auctionItem);
+    // this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
   }
 
   showInfo() {
     this.auctionHistory = this.auctionService.getBidHistory(this.auctionItem);
     this.showAuctionInfo = !this.showAuctionInfo;
-    console.log(this.auctionItem);
   }
 }

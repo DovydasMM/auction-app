@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AuctionCreatorComponent } from './auction-creator/auction-creator.component';
@@ -11,9 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuctionBidComponent } from './auction-bid/auction-bid.component';
 
 @NgModule({
-  declarations: [AppComponent, AuctionCreatorComponent, AuctionItemComponent],
+  declarations: [
+    AppComponent,
+    AuctionCreatorComponent,
+    AuctionItemComponent,
+    AuctionBidComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -24,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatNativeDateModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
