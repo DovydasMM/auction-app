@@ -21,39 +21,20 @@
       <p>{{ auctionItem.highestBid }}€</p>
     </div>
 
-    <p *ngIf="auctionItem.status == 'ended'">Auction has ended</p>
-    <!-- <p *ngIf="auctionItem.auctionOwner == auctionUser.userName">Your item</p> -->
-    <button
-      class="btn btn-outline-success btn-sm"
-      *ngIf="
-        auctionUser.userName == auctionItem.auctionOwner &&
-        auctionItem.status == 'inactive'
-      "
-      (click)="startAuction()"
-    >
-      Start auction
-    </button>
-
-    <div class="auction-bidTimer" *ngIf="auctionItem.status != 'inactive'">
-      <button class="btn btn-outline-dark btn-sm" (click)="showInfo()">
-        <fa-icon
-          class="auction-arrow"
-          [icon]="showAuctionInfo ? arrowUp : arrowDown"
-        ></fa-icon>
-      </button>
-
-      <button
-        class="btn btn-outline-primary btn-sm"
-        (click)="bidAuction()"
-        *ngIf="
-          auctionUser.userName != auctionItem.auctionOwner &&
-          auctionItem.status == 'active'
-        "
-      >
-        Bid
-      </button>
-    </div>
+    <p class="auction-bidTimer status" *ngIf="auctionItem.status == 'ended'">
+      Auction has ended
+    </p>
   </div>
+  <button
+    class="btn btn-outline-success btn-sm"
+    *ngIf="
+      auctionUser.userName == auctionItem.auctionOwner &&
+      auctionItem.status == 'inactive'
+    "
+    (click)="startAuction()"
+  >
+    Start auction
+  </button>
 
   <div *ngIf="showAuctionInfo">
     <div
@@ -76,5 +57,24 @@
         <p>Winning price: {{ auctionItem.highestBid }}€</p>
       </div>
     </div>
+  </div>
+  <div class="auction-bidTimer" *ngIf="auctionItem.status != 'inactive'">
+    <button class="btn btn-outline-dark btn-sm" (click)="showInfo()">
+      <fa-icon
+        class="auction-arrow"
+        [icon]="showAuctionInfo ? arrowDown : arrowUp"
+      ></fa-icon>
+    </button>
+
+    <button
+      class="btn btn-outline-primary btn-sm"
+      (click)="bidAuction()"
+      *ngIf="
+        auctionUser.userName != auctionItem.auctionOwner &&
+        auctionItem.status == 'active'
+      "
+    >
+      Bid
+    </button>
   </div>
 </div>

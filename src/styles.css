@@ -68,13 +68,23 @@ p {
 .auction-description {
   font-weight: 400;
   font-style: italic;
+  min-height: 3.25rem;
+}
+
+.auction-name,
+.auction-description {
+  word-break: break-all;
 }
 
 .auction-bidTimer {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
+}
+
+.auction-bidTimer.status {
+  width: fit-content;
 }
 
 .auction-info {
@@ -92,6 +102,7 @@ p {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: center;
+  min-height: 3.5rem;
 }
 
 .auction-container {
@@ -177,6 +188,7 @@ body {
 
 .form-element input {
   margin-top: 1rem;
+  display: flex;
 }
 
 .btn-auction {
@@ -194,8 +206,10 @@ label {
   font-weight: 500;
 }
 
-input {
+input,
+textarea {
   display: flex;
+  width: 100%;
 }
 
 .alert.alert-danger {
