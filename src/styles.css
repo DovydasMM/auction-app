@@ -41,6 +41,7 @@ p {
 
 .auction-title {
   margin-left: 1rem;
+  margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: bold;
 }
@@ -63,6 +64,7 @@ p {
   font-size: 1.25rem;
   font-weight: 800;
   padding: 0.5rem 0 1rem 0;
+  text-align: center;
 }
 
 .auction-description {
@@ -226,16 +228,16 @@ input {
   }
 }
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 480px) and (max-width: 800px) {
   body {
     display: flex;
-    height: 95%;
-    width: 95%;
+    font-size: 12px;
   }
 
   .mainBody {
     flex-grow: 1;
     flex-direction: column;
+    min-width: 100vw;
   }
 
   .auction-form {
@@ -246,8 +248,8 @@ input {
     flex-grow: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 0.75rem;
+    justify-content: space-around;
+    max-height: 6rem;
     position: sticky;
     overflow-x: hidden;
     z-index: 1;
@@ -271,8 +273,8 @@ input {
   }
 
   .containers {
-    flex-grow: 1;
     min-width: 100%;
+    padding-left: 2rem;
   }
 
   .sidebar-options {
@@ -280,6 +282,6 @@ input {
   }
 
   .container-auctions {
-    grid-template-columns: repeat(2, 16rem);
+    grid-template-columns: repeat(2, 18rem);
   }
 }

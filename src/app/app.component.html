@@ -36,7 +36,9 @@
           ></app-auction-item>
         </div>
       </div>
-      <p class="auction-title">{{ currentUser.userName }} Bids</p>
+      <p *ngIf="currentUser.userBids.length != 0" class="auction-title">
+        {{ currentUser.userName }} Bids
+      </p>
       <div class="container-auctions">
         <div *ngFor="let auction of currentUser.userBids">
           <app-auction-item

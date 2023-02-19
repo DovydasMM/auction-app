@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   activeList: Auction[];
   userList: AuctionUser[];
   currentUser: AuctionUser;
-  currentMenu: string = 'userAuctions';
+  currentMenu: string = 'activeAuctions';
   userIcon = faUser;
 
   ngOnInit(): void {
