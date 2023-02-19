@@ -229,14 +229,21 @@ input {
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   body {
     display: flex;
-    min-width: 100%;
+    height: 95%;
+    width: 95%;
   }
 
   .mainBody {
+    flex-grow: 1;
     flex-direction: column;
   }
 
+  .auction-form {
+    height: 18rem;
+  }
+
   .sidebar {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -264,7 +271,8 @@ input {
   }
 
   .containers {
-    width: 100%;
+    flex-grow: 1;
+    min-width: 100%;
   }
 
   .sidebar-options {
