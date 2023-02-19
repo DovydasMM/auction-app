@@ -1,16 +1,22 @@
-<div class="auction-form">
+<div class="auction-form bid">
   <form [formGroup]="bidForm" (ngSubmit)="onSubmit()" #form="ngForm">
-    <label for="bidSum">Enter your bid</label>
-    <input formControlName="bidSum" type="number" id="bidSum" />
-    <p *ngIf="bidForm.get('bidSum')?.errors?.['bidIsLower'] && form.submitted">
-      Enter higher bid
-    </p>
+    <div class="form-element bid">
+      <label for="bidSum">Enter your bid</label>
+      <input formControlName="bidSum" type="number" id="bidSum" />
+      <p
+        class="alert alert-danger"
+        *ngIf="bidForm.get('bidSum')?.errors?.['bidIsLower'] && form.submitted"
+      >
+        Enter higher bid
+      </p>
 
-    <p
-      *ngIf="bidForm.get('bidSum')?.errors?.['smallIncrease'] && form.submitted"
-    >
-      Your bid must be atleast 10€ higher
-    </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="bidForm.get('bidSum')?.errors?.['smallIncrease'] && form.submitted && !bidForm.get('bidSum')?.errors?.['bidIsLower']"
+      >
+        Your bid must be atleast 10€ higher
+      </p>
+    </div>
 
     <button type="submit" class="btn btn-success">Commit bid</button>
   </form>
