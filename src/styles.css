@@ -66,6 +66,8 @@ p {
 }
 
 .auction-description {
+  overflow-wrap: break-word;
+  hyphens: manual;
   font-weight: 400;
   font-style: italic;
   min-height: 3.25rem;
@@ -128,7 +130,14 @@ p {
 .sidebar-options {
   cursor: pointer;
   margin-top: 0.25rem;
+  padding-left: 0.25rem;
   font-size: 1rem;
+}
+
+.sidebar-options.active {
+  background-color: #abd5f3;
+  font-weight: 500;
+  border-left: #112d4e 4px solid;
 }
 
 .sidebar-options:hover {

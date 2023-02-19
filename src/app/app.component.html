@@ -5,7 +5,11 @@
       <p class="sidebar-title">Available Users</p>
       <div class="sidebar-menu">
         <div *ngFor="let user of userList">
-          <p (click)="changeUser(user)" class="sidebar-options">
+          <p
+            (click)="changeUser(user)"
+            class="sidebar-options"
+            [ngClass]="{ active: currentUser == user }"
+          >
             <fa-icon [icon]="userIcon" style="padding-right: 0.7rem"></fa-icon
             >{{ user.userName }}
           </p>
@@ -16,10 +20,18 @@
     <div class="sidebar-items">
       <p class="sidebar-title">{{ currentUser.userName }} menu</p>
       <div class="sidebar-menu">
-        <p (click)="changeMenu('activeAuctions')" class="sidebar-options">
+        <p
+          (click)="changeMenu('activeAuctions')"
+          class="sidebar-options"
+          [ngClass]="{ active: currentMenu == 'activeAuctions' }"
+        >
           Active auctions
         </p>
-        <p (click)="changeMenu('userAuctions')" class="sidebar-options">
+        <p
+          (click)="changeMenu('userAuctions')"
+          class="sidebar-options"
+          [ngClass]="{ active: currentMenu == 'userAuctions' }"
+        >
           My auctions
         </p>
       </div>
