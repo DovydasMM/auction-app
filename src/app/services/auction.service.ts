@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 export class AuctionService {
   auctionArray: Auction[] = [];
   auctionChanged = new Subject<Auction[]>();
-  auctionDuartion = 9999;
+  auctionDuartion = 60;
   constructor(
     private userService: UserService,
     private postService: PostsService
