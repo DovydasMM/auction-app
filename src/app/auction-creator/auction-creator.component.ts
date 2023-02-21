@@ -1,5 +1,5 @@
 import { AuctionService } from './../services/auction.service';
-import { Component, Inject, Input, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuctionUser } from '../models/auctionUser.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';

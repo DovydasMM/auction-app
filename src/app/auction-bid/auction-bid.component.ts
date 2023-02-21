@@ -1,7 +1,5 @@
-import { AuctionUser } from './../models/auctionUser.model';
-import { Auction } from './../models/auction.model';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuctionService } from '../services/auction.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -30,8 +28,6 @@ export class AuctionBidComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.bidForm);
-
     if (this.bidForm.valid) {
       let newBid = this.bidForm.controls['bidSum'].value;
       let auctionItem = this.auctionInfo.auctionItem;

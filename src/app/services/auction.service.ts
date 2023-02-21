@@ -59,7 +59,6 @@ export class AuctionService {
         bidder: currentUser.userName,
         bidSum: auctionItem.highestBid,
       };
-      console.log(auctionItem.bidHistory);
       //Checks if current bidder has already bid on this auction.
       //If he has, it updates his sum.
       //If Not, he is added to the bidder list
@@ -81,7 +80,6 @@ export class AuctionService {
 
   endOfAuction(auctionItem: Auction) {
     auctionItem.status = 'ended';
-
     this.updateDatabase();
     this.auctionChanged.next(this.auctionArray);
   }
@@ -92,8 +90,6 @@ export class AuctionService {
 
   getActiveAuctions() {
     let activeAuctions = [];
-
-    ///Don't know why filter doesn't work
     this.auctionArray.forEach((auction) => {
       if (auction.status === 'active') {
         activeAuctions.push(auction);
@@ -108,6 +104,7 @@ export class AuctionService {
   }
 
   getBidHistory(auctionItem: Auction) {
+    //Sorts list from highest to lowest bidder
     let bidHistory = auctionItem.bidHistory;
     bidHistory.sort((a, b) => (a.bidSum > b.bidSum ? -1 : 1));
     return bidHistory;

@@ -1,23 +1,15 @@
 <div class="auction-item">
   <div class="auction-info">
     <p class="auction-name">
-      {{
-        auctionItem.auctionName ? auctionItem.auctionName : "Name was forgotten"
-      }}
+      {{ auctionItem.auctionName }}
     </p>
     <p class="auction-description">
-      {{
-        auctionItem.auctionDescription
-          ? auctionItem.auctionDescription
-          : "Description was forgotten"
-      }}
+      {{ auctionItem.auctionDescription }}
     </p>
     <div *ngIf="auctionItem.status == 'active'" class="auction-bidTimer">
       <p *ngIf="timer != 0">
         {{ timer * 1000 | date : "mm:ss" }}
       </p>
-
-      <p *ngIf="auctionItem.status == 'inactive'">Inactive</p>
       <p>{{ auctionItem.highestBid }}€</p>
     </div>
 

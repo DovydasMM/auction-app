@@ -6,12 +6,7 @@ import { AuctionUser } from './models/auctionUser.model';
 import { AuctionService } from './services/auction.service';
 import { UserService } from './services/user.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
