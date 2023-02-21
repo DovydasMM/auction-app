@@ -1,5 +1,4 @@
 import { AuctionBidComponent } from './../auction-bid/auction-bid.component';
-import { UserService } from './../services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { Auction } from '../models/auction.model';
@@ -21,7 +20,6 @@ import { MatDialog } from '@angular/material/dialog';
 export class AuctionItemComponent implements OnInit {
   constructor(
     private auctionService: AuctionService,
-    private userService: UserService,
     private dialog: MatDialog
   ) {}
 
@@ -65,7 +63,6 @@ export class AuctionItemComponent implements OnInit {
       let currentTime = new Date().getTime();
       this.timer = ((this.auctionItem.endDate - currentTime) / 1000).toFixed(0);
       if (this.timer <= 0) {
-        console.log(this.timer);
         this.auctionService.endOfAuction(this.auctionItem);
         this.subscription.unsubscribe();
       }
